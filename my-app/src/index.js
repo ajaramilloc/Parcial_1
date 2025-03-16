@@ -1,8 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 import "./index.css";
+
+import "./i18n";
 
 import Login from "./login";
 import Home from "./home";
@@ -15,7 +22,6 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
     <>
-
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />

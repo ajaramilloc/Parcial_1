@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Carousel, Card, Container, Row, Col } from "react-bootstrap";
+import { Carousel, Card, Container, Row, Col, Button } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 import { FaUtensils, FaStore, FaShoppingCart } from "react-icons/fa";
 
 const DetailPage = () => {
+  const { t, i18n } = useTranslation();
   const { option } = useParams();
   const [carouselImages, setCarouselImages] = useState([]);
   const [cards, setCards] = useState([]);
 
   const menuOptions = {
-    menu: { text: "Menú", icon: <FaUtensils size={80}/>},
-    tiendas: { text: "Stores", icon: <FaStore size={80}/>},
-    carrito: { text: "Card", icon: <FaShoppingCart size={80}/>},
+    menu: { text: t("menu"), icon: <FaUtensils size={80} /> },
+    tiendas: { text: t("stores"), icon: <FaStore size={80} /> },
+    carrito: { text: t("cart"), icon: <FaShoppingCart size={80} /> },
+  };
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
   };
 
   useEffect(() => {
@@ -26,7 +32,6 @@ const DetailPage = () => {
       })
       .catch((error) => console.error("Error al cargar el carrusel:", error));
   }, []);
-
 
   useEffect(() => {
     fetch("https://my.api.mockaroo.com/parcial.json?key=7edd2060")
@@ -43,7 +48,25 @@ const DetailPage = () => {
 
   return (
     <Container fluid>
-      <div className="titulo"
+      <div
+        style={{
+          position: "absolute",
+          top: 20,
+          right: 20,
+          display: "flex",
+          gap: "10px",
+        }}
+      >
+        <Button variant="light" onClick={() => changeLanguage("es")}>
+          🇪🇸 ES
+        </Button>
+        <Button variant="light" onClick={() => changeLanguage("en")}>
+          🇺🇸 EN
+        </Button>
+      </div>
+
+      <div
+        className="titulo"
         style={{
           backgroundColor: "green",
           color: "white",
